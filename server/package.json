@@ -2,10 +2,20 @@
   "name": "server",
   "type": "module",
   "version": "0.1.0",
+  "scripts": {
+    "lint": "eslint '**/*.js'",
+    "pretty": "prettier --write '**/*.{js,css,json,md,html}'",
+    "fix": "eslint '**/*.js' --fix && npm run pretty",
+    "run": "node index.js"
+  },
   "private": true,
   "main": "index.js",
   "dependencies": {
     "express": "^4.17.1",
     "mysql2": "^2.3.0"
+  },
+  "devDependencies": {
+    "eslint-config-prettier": "^8.3.0",
+    "prettier": "^2.3.2"
   }
 }

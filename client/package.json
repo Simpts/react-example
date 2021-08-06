@@ -11,12 +11,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app"
-    ]
+    "eject": "react-scripts eject",
+    "lint": "eslint '**/*.js'",
+    "pretty": "prettier --write '**/*.{js,css,json,md,html}'",
+    "fix": "eslint '**/*.js' --fix && npm run pretty"
   },
   "browserslist": {
     "production": [
@@ -29,5 +27,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint-config-prettier": "^8.3.0",
+    "prettier": "^2.3.2"
   }
 }
