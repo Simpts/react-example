@@ -3,6 +3,9 @@ node_modules
 .pnp
 .pnp.js
 
+# React build directory
+build
+
 # macOS system files
 .DS_Store
 .AppleDouble
