@@ -2,11 +2,11 @@
   "name": "server",
   "type": "module",
   "version": "0.1.0",
+  "license": "",
   "scripts": {
     "lint": "eslint '**/*.js' --ignore-path ../.gitignore",
     "pretty": "prettier --write '**/*.{js,css,json,md,html}' --ignore-path ../.gitignore",
-    "fix": "eslint '**/*.js' --fix --ignore-path ../.gitignore && npm run pretty",
-    "start": "node index.js"
+    "fix": "eslint '**/*.js' --fix --ignore-path ../.gitignore && npm run pretty"
   },
   "private": true,
   "main": "index.js",

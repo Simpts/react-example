@@ -2,6 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
   "dependencies": {
     "@craco/craco": "^6.2.0",
     "react": "^17.0.2",
