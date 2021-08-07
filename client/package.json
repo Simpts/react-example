@@ -13,9 +13,9 @@
     "start": "craco start",
     "build": "craco build",
     "eject": "craco eject",
-    "lint": "eslint '**/*.js'",
-    "pretty": "prettier --write '**/*.{js,css,json,md,html}'",
-    "fix": "eslint '**/*.js' --fix && npm run pretty"
+    "lint": "eslint '**/*.js' --ignore-path ../.gitignore",
+    "pretty": "prettier --write '**/*.{js,css,json,md,html}' --ignore-path ../.gitignore",
+    "fix": "eslint '**/*.js' --fix --ignore-path ../.gitignore && npm run pretty"
   },
   "browserslist": {
     "production": [
