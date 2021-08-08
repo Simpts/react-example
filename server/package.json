@@ -6,11 +6,13 @@
   "scripts": {
     "lint": "eslint '**/*.js' --ignore-path ../.gitignore",
     "pretty": "prettier --write '**/*.{js,css,json,md,html}' --ignore-path ../.gitignore",
-    "fix": "eslint '**/*.js' --fix --ignore-path ../.gitignore && npm run pretty"
+    "fix": "eslint '**/*.js' --fix --ignore-path ../.gitignore && npm run pretty",
+    "start": "node --experimental-specifier-resolution=node index.js"
   },
   "private": true,
   "main": "index.js",
   "dependencies": {
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "mysql2": "^2.3.0"
   },
