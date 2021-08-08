@@ -19,7 +19,7 @@
     "dot-notation": [
       2,
       {
-        "allowKeywords": false
+        "allowKeywords": true
       }
     ],
     "max-classes-per-file": [1, 3],

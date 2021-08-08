@@ -12,11 +12,13 @@ function startApp() {
   const app = express();
   const staticPath = new URL(STATIC, import.meta.url).pathname;
 
-  app.use(express["static"](staticPath));
+  app.use(express.static(staticPath));
+  app.use(express.json());
+  app.disable("x-powered-by");
   app.use(routes());
 
   app.listen(PORT, HOST, () => {
-    console.log(`Listening at http://${HOST}:${PORT}`);
+    console.log(`Listening on http://${HOST}:${PORT}`);
   });
 
   return app;
