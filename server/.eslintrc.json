@@ -35,7 +35,9 @@
     "no-iterator": 1,
     "no-lone-blocks": 2,
     "no-loop-func": 2,
-    "no-magic-numbers": 1,
+    "no-magic-numbers": [1, {
+      "ignore": [0, 1]
+    }],
     "no-new": 2,
     "no-new-wrappers": 2,
     "no-return-assign": 2,
