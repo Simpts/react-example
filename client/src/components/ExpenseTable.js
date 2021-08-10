@@ -8,7 +8,7 @@ const COLUMNS = ["Beskrivning", "Belopp"];
  */
 export default function ExpenseTable(props) {
   return (
-    <div className="w-full max-h-40 sm:max-h-64 md:max-h-full overflow-y-scroll">
+    <div className="w-full max-h-40 sm:max-h-64 md:max-h-96 overflow-y-scroll">
       <table className="w-full rounded-2xl">
         <thead className="bg-blue-800 text-white">
           <tr>
@@ -26,7 +26,7 @@ export default function ExpenseTable(props) {
           </tr>
         </thead>
         <tbody className="py-4 bg-gray-50">
-          {props.rows && props.rows.length > 1
+          {props.rows && props.rows.length > 0
             ? props.rows.map((expense, index) => (
                 <tr
                   className={
