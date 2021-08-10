@@ -1,11 +1,14 @@
 import { formatCurrency } from "../lib/currency";
-const COLUMNS = ["Beskrivning", "Utgift"];
+const COLUMNS = ["Beskrivning", "Belopp"];
 
+/**
+ * @todo Implement pagination. Setting max-height on the
+ * wrapper is a bit hacky, and doesn't provide the best
+ * experience for mobile users. 
+ */
 export default function ExpenseTable(props) {
-  // Setting max-h is a bit hacky... should probably implement
-  // pagination for the sake of mobile devices.
   return (
-    <div class="w-full max-h-40 sm:max-h-64 md:max-h-full overflow-y-scroll">
+    <div className="w-full max-h-40 sm:max-h-64 md:max-h-full overflow-y-scroll">
       <table
         className="w-full rounded-2xl"
       >

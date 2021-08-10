@@ -1,3 +1,4 @@
+import CountUp from 'react-countup';
 import { formatCurrency } from "../lib/currency";
 
 export default function Summary(props) {
@@ -7,7 +8,8 @@ export default function Summary(props) {
         Totala utgifter:
       </h1>
       <span className="text-4xl font-extralight">
-        {formatCurrency(props.total ?? 0)}
+        <CountUp decimals={2} start={0} end={props.total || 0} duration={2} preserveValue={true} formattingFn={formatCurrency} />
+        {/* {formatCurrency(props.total ?? 0)} */}
       </span>
     </div>
   );
