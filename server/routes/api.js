@@ -25,7 +25,7 @@ export default app => {
 
   /**
    * Match POST reqs both on /expense and /expenses
-   * 
+   *
    * @todo Validate request data using express-validator
    */
   route.post("/expenses?", async (req, res) => {
@@ -50,7 +50,7 @@ export default app => {
 
 /**
  * Simple utility function for returning an error/data
- * array from a promise to avoid "try/catch hell".
+ * array from a promise to avoid "try/catch hell"
  */
 function to(promise) {
   return promise.then(data => [null, data]).catch(error => [error, null]);

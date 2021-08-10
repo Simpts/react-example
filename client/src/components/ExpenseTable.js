@@ -7,11 +7,11 @@ export default function ExpenseTable(props) {
       className="border-collapse w-full rounded-2xl"
       aria-labelledby="table-title"
     >
-      <thead className="bg-blue-700 text-white">
+      <thead className="bg-blue-800 text-white">
         <tr>
           {COLUMNS.map((col, index) => (
             <th
-              className={`text-left py-2 ${index === 0 ? "pl-4" : ""}`}
+              className={`text-left text-lg py-2 ${index === 0 ? "pl-4" : ""}`}
               key={col}
               scope="col"
             >
@@ -29,13 +29,13 @@ export default function ExpenseTable(props) {
             key={index}
           >
             <th
-              className={`w-full text-left font-light text-black pl-4 ${
+              className={`w-full text-left font-light text-black px-4 ${
                 !expense.description ? "text-opacity-60 italic" : ""
               } `}
               role="cell"
               scope="row"
             >
-              {expense.description || "Allmänn utgift"}
+              {expense.description || "Allmän utgift"}
             </th>
             <td className="pr-4 py-2">{formatCurrency(expense.amount)}</td>
           </tr>

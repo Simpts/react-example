@@ -5,7 +5,7 @@ export function formatCurrency(amount) {
   const formatter = new Intl.NumberFormat(undefined, {
     style: "currency",
     currency: "SEK",
-    minimumFractionDigits: MAX_DECIMALS
+    minimumFractionDigits: MAX_DECIMALS,
   });
 
   return formatter.format(amount);
@@ -21,6 +21,6 @@ export function safeSum(amounts) {
   const intFactor = 10 ** MAX_DECIMALS;
 
   return amounts.reduce((accumulator, value) => {
-    return ((accumulator * intFactor) + (value * intFactor)) / intFactor
-  })
+    return (accumulator * intFactor + value * intFactor) / intFactor;
+  });
 }
