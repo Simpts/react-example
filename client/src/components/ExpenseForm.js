@@ -2,7 +2,7 @@ import { MAX_DECIMALS } from "../lib/currency";
 
 function InputFloat(props) {
   return (
-    <div className="relative">
+    <div className="relative mt-6 w-full sm:auto">
       <label
         htmlFor={props.for}
         style={{ zIndex: "-1" }}
@@ -25,7 +25,7 @@ export default function ExpenseForm(props) {
 
   return (
     <form
-      className="w-full flex justify-between items-center"
+      className="w-full max-w-xs sm:max-w-full mx-auto flex flex-col sm:flex-row justify-center sm:justify-between items-center"
       onSubmit={props.onSubmit}
     >
       <InputFloat
@@ -34,7 +34,7 @@ export default function ExpenseForm(props) {
         active={props.description.length > 0}
       >
         <input
-          className="transition-colors bg-transparent border-b-2 border-gray-600 hover:border-yellow-500 focus:border-yellow-500 focus:outline-none"
+          className="w-full sm:w-auto transition-colors bg-transparent border-b-2 border-gray-600 hover:border-yellow-500 focus:border-yellow-500 focus:outline-none"
           type="text"
           id="description"
           value={props.description}
@@ -48,7 +48,7 @@ export default function ExpenseForm(props) {
         active={props.amount.length > 0}
       >
         <input
-          className="transition-colors bg-transparent border-b-2 border-gray-600 hover:border-yellow-500 focus:border-yellow-500 focus:outline-none"
+          className="w-full sm:w-auto transition-colors bg-transparent border-b-2 border-gray-600 hover:border-yellow-500 focus:border-yellow-500 focus:outline-none"
           type="number"
           id="amount"
           value={props.amount}
@@ -60,7 +60,7 @@ export default function ExpenseForm(props) {
           required
         />
       </InputFloat>
-      <button className="py-2 px-4 bg-yellow-500 text-white rounded-lg active:shadow-inner">
+      <button className="py-2 px-4 mt-6 bg-yellow-500 text-white rounded-lg whitespace-nowrap active:shadow-inner">
         Lägg till
       </button>
     </form>
