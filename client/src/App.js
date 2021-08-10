@@ -1,9 +1,33 @@
+import { useState } from "react";
 import Summary from "./components/ExpenseSummary";
 import ExpenseTable from "./components/ExpenseTable";
 import ExpenseForm from "./components/ExpenseForm";
 import { safeSum } from "./lib/currency";
 
 function App() {
+  const [newDescription, setNewDescription] = useState("");
+  const [newAmount, setNewAmount] = useState("");
+
+  const handleSubmit = event => {
+    setNewDescription("");
+    setNewAmount("");
+    event.preventDefault();
+  };
+
+  const handleDescriptionChange = ({ target }) => {
+    const maxCharacters = 140;
+    let value = target.value;
+    if (value.length > maxCharacters) {
+      value = value.substring(0, maxCharacters);
+    }
+
+    setNewDescription(value);
+  };
+
+  const handleAmountChange = ({ target }) => {
+    setNewAmount(target.value);
+  };
+
   const fakeData = [
     {
       amount: 299.99,
@@ -24,7 +48,13 @@ function App() {
         <hr className="my-4" />
         <ExpenseTable rows={fakeData} />
       </div>
-      <ExpenseForm />
+      <ExpenseForm
+        amount={newAmount}
+        description={newDescription}
+        onAmountChange={handleAmountChange}
+        onDescriptionChange={handleDescriptionChange}
+        onSubmit={handleSubmit}
+      />
     </div>
   );
 }

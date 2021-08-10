@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { MAX_DECIMALS } from "../lib/currency";
 
 function InputFloat(props) {
@@ -19,47 +18,41 @@ function InputFloat(props) {
 }
 
 export default function ExpenseForm(props) {
-  const [description, setDescription] = useState("");
-  const [amount, setAmount] = useState("");
-
   const handleBlur = ({ target }) => {
     if (!target.value) return;
-    const roundedValue = parseFloat(target.value).toFixed(MAX_DECIMALS);
-    setAmount(roundedValue);
-  };
-
-  const handleSubmit = event => {
-    setDescription("");
-    setAmount("");
-    event.preventDefault();
+    target.value = parseFloat(target.value).toFixed(MAX_DECIMALS);
   };
 
   return (
     <form
       className="w-full flex justify-between items-center"
-      onSubmit={handleSubmit}
+      onSubmit={props.onSubmit}
     >
       <InputFloat
         for="description"
         description="Beskrivning"
-        active={description.length > 0}
+        active={props.description.length > 0}
       >
         <input
           className="transition-colors bg-transparent border-b-2 border-gray-600 hover:border-yellow-500 focus:border-yellow-500 focus:outline-none"
           type="text"
           id="description"
-          value={description}
-          onChange={({ target }) => setDescription(target.value)}
+          value={props.description}
+          onChange={props.onDescriptionChange}
           maxLength="140"
         />
       </InputFloat>
-      <InputFloat for="amount" description="Belopp" active={amount.length > 0}>
+      <InputFloat
+        for="amount"
+        description="Belopp"
+        active={props.amount.length > 0}
+      >
         <input
           className="transition-colors bg-transparent border-b-2 border-gray-600 hover:border-yellow-500 focus:border-yellow-500 focus:outline-none"
           type="number"
           id="amount"
-          value={amount}
-          onChange={({ target }) => setAmount(target.value)}
+          value={props.amount}
+          onChange={props.onAmountChange}
           onBlur={handleBlur}
           min="0"
           max="99999999999"
