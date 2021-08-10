@@ -60,7 +60,7 @@ export default function ExpenseForm(props) {
           required
         />
       </InputFloat>
-      <button className="py-2 px-4 mt-6 bg-yellow-500 text-white rounded-lg whitespace-nowrap active:shadow-inner">
+      <button className="py-2 px-4 mt-6 bg-yellow-500 text-white font-semibold rounded-lg whitespace-nowrap active:shadow-inner">
         Lägg till
       </button>
     </form>

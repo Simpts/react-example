@@ -6,7 +6,6 @@ import Summary from "./components/ExpenseSummary";
 import ExpenseTable from "./components/ExpenseTable";
 import ExpenseForm from "./components/ExpenseForm";
 import { safeSum, MAX_DECIMALS } from "./lib/currency";
-const NOTIFICATION_TIMEOUT = 60000;
 const API_PATH = "/api/expenses";
 
 function App() {
@@ -23,6 +22,10 @@ function App() {
     });
   }
 
+  /**
+   * @todo Roll back to copied pre-mutation state if POST req
+   * fails to handle complete network failure better.
+   */
   const handleSubmit = event => {
     event.preventDefault();
     const floatAmount = parseFloat(newAmount).toFixed(MAX_DECIMALS);
@@ -69,7 +72,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen w-screen max-w-xl mx-auto flex flex-col items-start justify-center px-4 py-8">
+    <div className="min-h-screen w-screen max-w-xl mx-auto flex flex-col items-start justify-center px-4 py-4 sm:py-6 md:py-8">
       <Summary
         total={
           rows && rows.length > 0
