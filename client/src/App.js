@@ -19,8 +19,8 @@ function App() {
     console.error(error);
     toast.error("Hoppsan, något verkar ha gått fel! Prova att försöka igen.", {
       // Prevent duplicates
-      toastId: "general-error"
-    })
+      toastId: "general-error",
+    });
   }
 
   const handleSubmit = event => {

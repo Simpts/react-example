@@ -7,12 +7,23 @@ const DB = mysql.createPool({
   database: process.env.DB_NAME,
 });
 
+/**
+ * @todo Support pagination with offsets
+ */
 export function getExpenses() {
   return new Promise((resolve, reject) => {
-    DB.execute("SELECT amount, description FROM expenses", (error, rows) => {
-      if (error) return reject(error);
-      resolve(rows);
-    });
+    DB.execute(
+      `SELECT amount, description
+                FROM (
+                      SELECT *
+                      FROM expenses
+                      ORDER BY expense_id DESC
+                     ) AS temp`,
+      (error, rows) => {
+        if (error) return reject(error);
+        resolve(rows);
+      },
+    );
   });
 }
 

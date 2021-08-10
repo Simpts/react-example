@@ -11,7 +11,6 @@ const STATIC = process.env.STATIC ?? "../client/build";
 function startApp() {
   const app = express();
   const staticPath = new URL(STATIC, import.meta.url).pathname;
-
   app.use(express.static(staticPath));
   app.use(express.json());
   app.disable("x-powered-by");
