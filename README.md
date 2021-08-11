@@ -1,8 +1,8 @@
 # Example React App
 
-A small example expense tracker application (in Swedish) built with React, Express and MySQL.
+A small expense tracker application example (in Swedish) built with React, Tailwind, Express and MySQL.
 
-**Please note** that the server assumes the existence of a MySQL database containing an `expenses` table with an auto-incrmenting PK `expense_id`, an `amount` column of type `DECIMAL(13,2)` and a `description` column of type `VARCHAR(140)`.
+**Please note** that the server assumes the existence of a MySQL database containing an `expenses` table with an auto-incrementing PK `expense_id`, an `amount` column of type `DECIMAL(13,2)`, and a `description` column of type `VARCHAR(140)`.
 
 ## Running it locally
 

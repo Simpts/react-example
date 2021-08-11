@@ -6,7 +6,7 @@ import Summary from "./components/ExpenseSummary";
 import ExpenseTable from "./components/ExpenseTable";
 import ExpenseForm from "./components/ExpenseForm";
 import { safeSum, decToFloat } from "./lib/currency";
-const API_PATH = "http://localhost:8080/api/expenses";
+const API_PATH = "/api/expenses";
 
 export default function App() {
   const [newDescription, setNewDescription] = useState("");
