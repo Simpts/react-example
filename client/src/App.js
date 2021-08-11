@@ -5,32 +5,34 @@ import "react-toastify/dist/ReactToastify.css";
 import Summary from "./components/ExpenseSummary";
 import ExpenseTable from "./components/ExpenseTable";
 import ExpenseForm from "./components/ExpenseForm";
-import { safeSum, MAX_DECIMALS } from "./lib/currency";
-const API_PATH = "/api/expenses";
+import { safeSum, decToFloat } from "./lib/currency";
+const API_PATH = "http://localhost:8080/api/expenses";
 
-function App() {
+export default function App() {
   const [newDescription, setNewDescription] = useState("");
   const [newAmount, setNewAmount] = useState("");
   const { data, error } = useSWR(API_PATH);
-  const rows = data?.data?.rows;
+  const rows = data?.data?.rows || [];
 
   if (error) {
     console.error(error);
-    toast.error("Hoppsan, något verkar ha gått fel! Prova att försöka igen.", {
-      // Prevent duplicates
-      toastId: "general-error",
-    });
+    toast.error(
+      "Hoppsan, något verkar ha gått fel! Försöker etablera en anslutning...",
+      {
+        // Prevent duplicates
+        toastId: "general-error",
+        autoClose: false,
+      },
+    );
+  } else {
+    toast.dismiss("general-error");
   }
 
-  /**
-   * @todo Roll back to copied pre-mutation state if POST req
-   * fails to handle complete network failure better.
-   */
   const handleSubmit = event => {
     event.preventDefault();
-    const floatAmount = parseFloat(newAmount).toFixed(MAX_DECIMALS);
+    const preMutationState = { ...data };
     const payload = {
-      amount: floatAmount,
+      amount: decToFloat(newAmount),
       description: newDescription,
     };
 
@@ -42,15 +44,19 @@ function App() {
 
         if (data.error) {
           console.error(data.error);
-          toast.error("Utgiften kunde inte läggas till. Var god försök igen.");
-          // Revalidate to roll back changes
-          mutate(API_PATH);
+          toast.error(
+            "Utgiften kunde inte läggas till. Var god försök igen senare.",
+          );
+          // Revalidate and roll back to pre-mutation state
+          mutate(API_PATH, preMutationState);
         }
       })
       .catch(error => {
         console.error(error);
-        toast.error("Utgiften kunde inte läggas till. Var god försök igen.");
-        mutate(API_PATH);
+        toast.error(
+          "Utgiften kunde inte läggas till. Var god försök igen senare.",
+        );
+        mutate(API_PATH, preMutationState);
       });
 
     setNewDescription("");
@@ -94,13 +100,13 @@ function App() {
         onDescriptionChange={handleDescriptionChange}
         onSubmit={handleSubmit}
       />
-      <ToastContainer limit={3} />
+      <ToastContainer newestOnTop={true} limit={3} />
     </div>
   );
 }
 
 /**
- * Simple fetch wrapper for convenient POST-reqs.
+ * Simple fetch wrapper for convenient POST requests.
  */
 function post(endpoint, data) {
   return fetch(endpoint, {
@@ -112,5 +118,3 @@ function post(endpoint, data) {
     body: JSON.stringify(data),
   });
 }
-
-export default App;
