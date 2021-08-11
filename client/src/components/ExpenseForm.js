@@ -1,4 +1,4 @@
-import { MAX_DECIMALS } from "../lib/currency";
+import { decToFloat } from "../lib/currency";
 
 function InputFloat(props) {
   return (
@@ -18,9 +18,23 @@ function InputFloat(props) {
 }
 
 export default function ExpenseForm(props) {
+  const decimalRegEx = /^\d{0,11}[.|,]?\d{0,2}$/;
+
   const handleBlur = ({ target }) => {
     if (!target.value) return;
-    target.value = parseFloat(target.value).toFixed(MAX_DECIMALS);
+    target.value = decToFloat(target.value);
+  };
+
+  // This semi-hacky function is required due to
+  // validation/conversion issues stemming from the fact that
+  // different locales recognize different decimal characters
+  // as valid, and there's no way to force consistency.
+  const handleInput = event => {
+    const newChar = event.data.toString();
+    const value = event.target.value + newChar;
+    if (!decimalRegEx.test(value)) {
+      event.preventDefault();
+    }
   };
 
   return (
@@ -49,18 +63,21 @@ export default function ExpenseForm(props) {
       >
         <input
           className="w-full sm:w-auto transition-colors bg-transparent border-b-2 border-gray-600 hover:border-yellow-500 focus:border-yellow-500 focus:outline-none"
-          type="number"
+          type="text"
           id="amount"
           value={props.amount}
           onChange={props.onAmountChange}
           onBlur={handleBlur}
-          min="0"
-          max="99999999999"
-          step="0.01"
+          // NOTICE: beforeInput has relatively poor browser support
+          onBeforeInput={handleInput}
+          maxLength="14"
+          // eslint-disable-next-line no-magic-numbers
+          pattern={decimalRegEx.toString().slice(1, -1)}
+          inputMode="decimal"
           required
         />
       </InputFloat>
-      <button className="py-2 px-4 mt-6 bg-yellow-500 text-white font-semibold rounded-lg whitespace-nowrap active:shadow-inner">
+      <button className="transition-colors py-2 px-4 mt-6 focus:bg-yellow-500 focus:text-white hover:bg-yellow-500 hover:text-white border-2 border-yellow-500 text-yellow-500 font-semibold rounded-lg whitespace-nowrap">
         Lägg till
       </button>
     </form>
