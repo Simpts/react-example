@@ -3,6 +3,7 @@ import { getExpenses, addExpense } from "../services/expenseTracker";
 
 const CODES = {
   SERVER_ERROR: 500,
+  BAD_REQUEST: 400,
 };
 
 export default app => {
@@ -29,8 +30,19 @@ export default app => {
    * @todo Validate request data using express-validator
    */
   route.post("/expenses?", async (req, res) => {
-    const amount = req.body.amount;
+    const maxDecimals = 2;
+    let amount = parseFloat(Number(req.body.amount).toFixed(maxDecimals));
     const description = req.body.description;
+
+    if (
+      typeof amount != "number" ||
+      isNaN(amount) ||
+      amount <= 0 ||
+      description.length > 140
+    ) {
+      return res.json({ error: "Bad Request" }).status(CODES.BAD_REQUEST);
+    }
+
     const [error] = await to(addExpense(amount, description));
 
     if (error) {

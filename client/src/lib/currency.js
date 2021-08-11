@@ -12,11 +12,11 @@ export function formatCurrency(amount) {
 }
 
 /**
- * Utility function to convert a variable to a float.
+ * Utility function to convert a decimal string to a float.
  */
 export function decToFloat(dec) {
   if (typeof dec != "string") dec = dec.toString();
-  return parseFloat(dec.replace(",", ".")).toFixed(MAX_DECIMALS);
+  return parseFloat(Number(dec.replace(",", ".")).toFixed(MAX_DECIMALS));
 }
 
 /**
