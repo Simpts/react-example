@@ -12,6 +12,14 @@ export function formatCurrency(amount) {
 }
 
 /**
+ * Utility function to convert a variable to a float.
+ */
+export function decToFloat(dec) {
+  if (typeof dec != "string") dec = dec.toString();
+  return parseFloat(dec.replace(",", ".")).toFixed(MAX_DECIMALS);
+}
+
+/**
  * Safely sums floating point values by multiplying
  * them into integers before adding and then dividing
  * the final result by the multiplication factor.
